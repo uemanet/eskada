@@ -69,9 +69,8 @@ class user_edit_form extends moodleform {
         $mform->setType('id', PARAM_INT);
         $mform->addElement('hidden', 'course', $COURSE->id);
         $mform->setType('course', PARAM_INT);
-
-        // Print the required moodle fields first.
-        $mform->addElement('header', 'moodle', $strgeneral);
+        $mform->addElement('hidden', 'returnto', 'profile');
+        $mform->setType('returnto', PARAM_TEXT);
 
         // Shared fields.
         useredit_shared_definition($mform, $editoroptions, $filemanageroptions, $user);

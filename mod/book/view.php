@@ -77,7 +77,7 @@ if ($allowedit and !$chapters) {
 // Check chapterid and read chapter data
 if ($chapterid == '0') { // Go to first chapter if no given.
     // Trigger course module viewed event.
-    book_view($book, null, false, $course, $cm, $context);
+    book_view($book, null, $course, $cm, $context);
 
     foreach ($chapters as $ch) {
         if ($edit || ($ch->hidden && $viewhidden)) {
@@ -88,6 +88,13 @@ if ($chapterid == '0') { // Go to first chapter if no given.
             $chapterid = $ch->id;
             break;
         }
+    }
+
+    // If a page was not set, set the last visited page to display if it exists and is not hidden.
+    $lastuserviewedchapter = \mod_book\data\userviews::get_last_book_userview($book, $USER->id);
+
+    if (!$edit && $lastuserviewedchapter != false) {
+        $chapterid = $lastuserviewedchapter;
     }
 }
 
@@ -193,13 +200,7 @@ if ($book->navstyle) {
     }
 }
 
-// We need to discover if this is the last chapter to mark activity as completed.
-$islastchapter = false;
-if (!$nextid) {
-    $islastchapter = true;
-}
-
-book_view($book, $chapter, $islastchapter, $course, $cm, $context);
+book_view($book, $chapter, $course, $cm, $context);
 
 // =====================================================
 // Book display HTML code

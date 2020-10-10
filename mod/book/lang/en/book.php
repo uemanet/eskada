@@ -117,3 +117,18 @@ $string['subplugintype_booktool_plural'] = 'Book tools';
 $string['removeallbooktags'] = 'Remove all book tags';
 $string['tagarea_book_chapters'] = 'Book chapters';
 $string['tagsdeleted'] = 'Book tags have been deleted';
+
+$string['behavior'] = 'Behavior';
+$string['backtolastpage'] = 'Back to last page';
+$string['backtolastpage_help'] = 'If the back to last page checkbox is ticked, the user will back to last the last visited page, otherwise will always go to the first page when open the book.';
+
+$string['requiredcompletionview'] = 'The user needs to read at least this percent of the Book:';
+$string['completionviewselect'] = 'Required read percent';
+$string['bookviewreport'] = 'Book view report';
+$string['book:viewreports'] = 'View book reports';
+$string['reportindextitle'] = 'Book views report';
+$string['totalviews'] = 'Total views';
+$string['uniqueuserviews'] = 'Unique users view';
+$string['bookreadreport'] = 'Students reading progress';
+$string['reportreadtitle'] = 'Students book reading progress';
+$string['readprogress'] = 'Reading progress';

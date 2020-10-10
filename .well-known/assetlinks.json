@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "uemanet.eskada.twa",
+    "sha256_cert_fingerprints":
+    ["91:39:0E:CA:8C:CE:E7:80:E1:52:36:34:53:09:E1:DA:D7:EE:BD:90:BD:84:46:0A:0D:24:56:09:30:40:10:8F"]
+  }
+}]

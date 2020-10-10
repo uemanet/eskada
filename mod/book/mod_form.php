@@ -97,4 +97,67 @@ class mod_book_mod_form extends moodleform_mod {
 
         $this->add_action_buttons();
     }
+
+    /**
+     * Process the data before load the form
+     *
+     * @param array $defaultvalues
+     */
+    public function data_preprocessing(&$defaultvalues) {
+        if($defaultvalues['completionview'] != "0") {
+            $defaultvalues['completionviewactive'] = 1;
+        }
+    }
+
+    /**
+     * Process data after form submit
+     * @param stdClass $data
+     * @return stdClass|void
+     */
+    public function data_postprocessing($data) {
+        if(empty($data->completionviewactive)) {
+            $data->completionview = "0";
+        }
+
+        unset($data->completionviewactive);
+
+        return $data;
+    }
+
+    /**
+     * Book completion rule fields.
+     *
+     * @return array|void
+     *
+     * @throws coding_exception
+     */
+    public function add_completion_rules() {
+        $mform = $this->_form;
+
+        $completionviews = [];
+        for ($i = 10; $i <= 100; $i+=10) {
+            $completionviews[$i] = $i . '%';
+        }
+
+        $group = [
+            $mform->createElement('checkbox', 'completionviewactive', '   ', get_string('requiredcompletionview', 'book')),
+            $mform->createElement('select', 'completionview', get_string('completionviewselect', 'book'), $completionviews),
+        ];
+
+        $mform->addGroup($group, 'completionviewgroup', get_string('completionviewselect', 'book'), ['<br>'], false);
+        $mform->disabledIf('completionview', 'completionviewactive', 'notchecked');
+
+        return ['completionviewgroup'];
+    }
+
+    /**
+     * Called during validation to see whether some module-specific completion rules are selected.
+     *
+     * @param array $data Input data not yet validated.
+     *
+     * @return bool True if one or more rules is enabled, false if none are.
+     */
+    public function completion_rule_enabled($data) {
+        return (!empty($data['completionviewactive']) && $data['completionview'] > 0);
+    }
 }
