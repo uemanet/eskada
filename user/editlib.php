@@ -304,12 +304,14 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
 
     $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="21"');
     $mform->setType('city', PARAM_TEXT);
+    $mform->addRule('city', 'Obrigatório', 'required', null, 'client');
     if ($user->id > 0 && !empty($user->address)) {
         $mform->setDefault('city', $user->address);
     }
 
     $mform->addElement('text', 'address', get_string('state'), 'maxlength="120" size="21"');
     $mform->setType('address', PARAM_TEXT);
+    $mform->addRule('address', 'Obrigatório', 'required', null, 'client');
     if (!empty($CFG->defaultcity)) {
         $mform->setDefault('address', $CFG->defaultcity);
     }
@@ -321,6 +323,7 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     if (!empty($CFG->country)) {
         $mform->setDefault('country', core_user::get_property_default('country'));
     }
+    $mform->addRule('country', 'Obrigatório', 'required', null, 'client');
 
     if (isset($CFG->forcetimezone) and $CFG->forcetimezone != 99) {
         $choices = core_date::get_list_of_timezones($CFG->forcetimezone);
