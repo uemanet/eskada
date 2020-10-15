@@ -181,7 +181,7 @@ if ($returnto === 'profile') {
     if ($course->id != SITEID) {
         $returnurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
     } else {
-        $returnurl = new moodle_url('/user/edit.php', array('id' => $user->id));
+        $returnurl = new moodle_url('/my');
     }
 } else {
     $returnurl = new moodle_url('/user/preferences.php', array('userid' => $user->id));
