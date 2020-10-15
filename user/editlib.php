@@ -302,14 +302,16 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     $mform->setDefault('maildisplay', core_user::get_property_default('maildisplay'));
     $mform->addHelpButton('maildisplay', 'emaildisplay');
 
-    $mform->addElement('text', 'moodlenetprofile', get_string('moodlenetprofile', 'user'));
-    $mform->setType('moodlenetprofile', PARAM_NOTAGS);
-    $mform->addHelpButton('moodlenetprofile', 'moodlenetprofile', 'user');
-
     $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="21"');
     $mform->setType('city', PARAM_TEXT);
+    if ($user->id > 0 && !empty($user->address)) {
+        $mform->setDefault('city', $user->address);
+    }
+
+    $mform->addElement('text', 'address', get_string('state'), 'maxlength="120" size="21"');
+    $mform->setType('address', PARAM_TEXT);
     if (!empty($CFG->defaultcity)) {
-        $mform->setDefault('city', $CFG->defaultcity);
+        $mform->setDefault('address', $CFG->defaultcity);
     }
 
     $purpose = user_edit_map_field_purpose($user->id, 'country');
