@@ -127,7 +127,7 @@ if ($user->deleted) {
     die;
 }
 
-$PAGE->set_pagelayout('admin');
+$PAGE->set_pagelayout('mypublic');
 $PAGE->set_context($personalcontext);
 if ($USER->id != $user->id) {
     $PAGE->navigation->extend_for_user($user);
@@ -181,7 +181,7 @@ if ($returnto === 'profile') {
     if ($course->id != SITEID) {
         $returnurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
     } else {
-        $returnurl = new moodle_url('/user/profile.php', array('id' => $user->id));
+        $returnurl = new moodle_url('/my');
     }
 } else {
     $returnurl = new moodle_url('/user/preferences.php', array('userid' => $user->id));
