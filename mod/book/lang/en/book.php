@@ -67,7 +67,6 @@ $string['indicator:socialbreadthdef_help'] = 'The participant has reached this p
 $string['indicator:socialbreadthdef_link'] = 'Learning_analytics_indicators#Social_breadth';
 $string['movechapterup'] = 'Move chapter up "{$a}"';
 $string['movechapterdown'] = 'Move chapter down "{$a}"';
-$string['privacy:metadata'] = 'The book activity module does not store any personal data.';
 $string['search:activity'] = 'Book - resource information';
 $string['search:chapter'] = 'Book - chapters';
 $string['showchapter'] = 'Show chapter "{$a}"';
@@ -117,3 +116,24 @@ $string['subplugintype_booktool_plural'] = 'Book tools';
 $string['removeallbooktags'] = 'Remove all book tags';
 $string['tagarea_book_chapters'] = 'Book chapters';
 $string['tagsdeleted'] = 'Book tags have been deleted';
+
+$string['behavior'] = 'Behavior';
+$string['backtolastpage'] = 'Back to last page';
+$string['backtolastpage_help'] = 'If the back to last page checkbox is ticked, the user will back to last the last visited page, otherwise will always go to the first page when open the book.';
+
+$string['privacy:metadata:book_chapters_userviews'] = 'Information about book pages user view history';
+$string['privacy:metadata:book_chapters_userviews:chapterid'] = 'Chapter viewed';
+$string['privacy:metadata:book_chapters_userviews:userid'] = 'User who viewed the page';
+$string['privacy:metadata:book_chapters_userviews:timecreated'] = 'Time when the user viewed the page';
+
+$string['requiredcompletionview'] = 'The user needs to read at least this percent of the Book:';
+$string['completionviewselect'] = 'Required read percent';
+$string['bookviewreport'] = 'Book view report';
+$string['book:viewreports'] = 'View book reports';
+$string['reportindextitle'] = 'Book views report';
+$string['totalviews'] = 'Total views';
+$string['uniqueuserviews'] = 'Unique users view';
+$string['bookreadreport'] = 'Students reading progress';
+$string['reportreadtitle'] = 'Students book reading progress';
+$string['readprogress'] = 'Reading progress';
+
