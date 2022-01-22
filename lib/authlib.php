@@ -313,8 +313,7 @@ class auth_plugin_base {
     function signup_form() {
         global $CFG;
 
-        require_once($CFG->dirroot.'/login/signup_form.php');
-        return new login_signup_form(null, null, 'post', '', array('autocomplete'=>'on'));
+        return new \theme_olm\forms\login_signup_form(null, null, 'post', '', array('autocomplete'=>'on'));
     }
 
     /**
