@@ -696,18 +696,9 @@ function book_export_contents($cm, $baseurl) {
 function book_view($book, $context, $chapter = null) {
     global $DB;
 
-    $course = $DB->get_record('course', ['id' => $book->course], '*', MUST_EXIST);
-    $cm = $DB->get_record('course_modules', ['id' => $context->instanceid], '*', MUST_EXIST);
-
-    $completion = new completion_info($course);
-
     // First case, we are just opening the book.
     if (empty($chapter)) {
         \mod_book\event\course_module_viewed::create_from_book($book, $context)->trigger();
-
-        if ($cm->completionview && $book->readpercent == 0) {
-            $completion->set_module_viewed($cm);
-        }
     } else {
         \mod_book\event\chapter_viewed::create_from_chapter($book, $context, $chapter)->trigger();
     }
