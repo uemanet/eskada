@@ -121,13 +121,6 @@ $string['behavior'] = 'Behavior';
 $string['backtolastpage'] = 'Back to last page';
 $string['backtolastpage_help'] = 'If the back to last page checkbox is ticked, the user will back to last the last visited page, otherwise will always go to the first page when open the book.';
 
-$string['privacy:metadata:book_chapters_userviews'] = 'Information about book pages user view history';
-$string['privacy:metadata:book_chapters_userviews:chapterid'] = 'Chapter viewed';
-$string['privacy:metadata:book_chapters_userviews:userid'] = 'User who viewed the page';
-$string['privacy:metadata:book_chapters_userviews:timecreated'] = 'Time when the user viewed the page';
-
-$string['requiredcompletionview'] = 'The user needs to read at least this percent of the Book:';
-$string['completionviewselect'] = 'Required read percent';
 $string['bookviewreport'] = 'Book view report';
 $string['book:viewreports'] = 'View book reports';
 $string['reportindextitle'] = 'Book views report';
@@ -137,3 +130,12 @@ $string['bookreadreport'] = 'Students reading progress';
 $string['reportreadtitle'] = 'Students book reading progress';
 $string['readprogress'] = 'Reading progress';
 
+$string['readpercent_ruledesc'] = 'Watch {$a} of the video';
+$string['requiredreadpercent'] = 'The user needs to read at least this percent of the Book:';
+$string['readpercentselect'] = 'Required read percent';
+$string['readpercentvalidation'] = 'You need to define the required read percentage';
+
+$string['privacy:metadata:book_chapters_userviews'] = 'Information about book pages user view history';
+$string['privacy:metadata:book_chapters_userviews:chapterid'] = 'Chapter viewed';
+$string['privacy:metadata:book_chapters_userviews:userid'] = 'User who viewed the page';
+$string['privacy:metadata:book_chapters_userviews:timecreated'] = 'Time when the user viewed the page';

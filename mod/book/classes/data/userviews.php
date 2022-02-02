@@ -119,6 +119,26 @@ class userviews {
     }
 
     /**
+     * Returns if the book is completed
+     *
+     * @param $book
+     * @param $userid
+     *
+     * @return bool
+     *
+     * @throws \dml_exception
+     */
+    public static function is_book_read_complete($book, $userid) {
+        $bookprogress = self::get_book_userview_progress($book->id, $userid);
+
+        if ($book->readpercent >= $bookprogress) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Create a record of chapter user view.
      *
      * @param $chapterid

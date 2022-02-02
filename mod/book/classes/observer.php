@@ -75,17 +75,13 @@ class observer {
         $cm = $DB->get_record('course_modules', ['id' => $event->contextinstanceid], '*', MUST_EXIST);
         $book = $DB->get_record('book', ['id' => $cm->instance], '*', MUST_EXIST);
 
+        userviews::create_userview($event->objectid, $event->userid);
+
         $completion = new completion_info($course);
 
-        $completion->set_module_viewed($cm);
-
-        if ($completion->is_enabled($cm) && $book->completionview != 0) {
-            userviews::create_userview($event->objectid, $event->userid);
-
-            $status = book_get_completion_state($course, $cm, $event->userid, COMPLETION_AND);
-
+        if ($completion->is_enabled($cm) && $book->readpercent != 0) {
             $complete = COMPLETION_INCOMPLETE;
-            if ($status === true) {
+            if (\mod_book\data\userviews::is_book_read_complete($book, $event->userid)) {
                 $complete = COMPLETION_COMPLETE;
             }
 

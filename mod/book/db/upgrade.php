@@ -95,5 +95,16 @@ function xmldb_book_upgrade($oldversion) {
     // Automatically generated Moodle v3.11.0 release upgrade line.
     // Put any upgrade step following this.
 
+    if ($oldversion < 2021051800) {
+        $table = new xmldb_table('book');
+        $field = new xmldb_field('completionview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->rename_field($table, $field, 'readpercent');
+        }
+
+        upgrade_mod_savepoint(true, 2021051800, 'book');
+    }
+
     return true;
 }

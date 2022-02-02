@@ -48,9 +48,7 @@ class custom_completion extends activity_custom_completion {
 
         $book = $DB->get_record('book', array('id' => $cm->instance), '*', MUST_EXIST);
 
-        $percentviewed = \mod_book\data\userviews::get_book_userview_progress($book->id, $userid);
-
-        if ($percentviewed >= $book->completionview) {
+        if (\mod_book\data\userviews::is_book_read_complete($book, $userid)) {
             return COMPLETION_COMPLETE;
         }
 
@@ -63,7 +61,7 @@ class custom_completion extends activity_custom_completion {
      * @return array
      */
     public static function get_defined_custom_rules(): array {
-        return ['completionview'];
+        return ['readpercent'];
     }
 
     /**
@@ -72,8 +70,16 @@ class custom_completion extends activity_custom_completion {
      * @return array
      */
     public function get_custom_rule_descriptions(): array {
+        global $DB;
+
+        $bookid = $this->cm->instance;
+
+        if (!$book = $DB->get_record('book', ['id' => $bookid])) {
+            throw new \moodle_exception('Unable to find book with id ' . $bookid);
+        }
+
         return [
-            'completionview' => get_string('completionview', 'book')
+            'readpercent' => get_string('readpercent_ruledesc', 'mod_book', $book->readpercent)
         ];
     }
 
@@ -84,7 +90,8 @@ class custom_completion extends activity_custom_completion {
      */
     public function get_sort_order(): array {
         return [
-            'completionview'
+            'completionview',
+            'readpercent'
         ];
     }
 }

@@ -104,9 +104,9 @@ class mod_book_mod_form extends moodleform_mod {
      * @param array $defaultvalues
      */
     public function data_preprocessing(&$defaultvalues) {
-        if($defaultvalues['completionview'] != "0") {
-            $defaultvalues['completionviewactive'] = 1;
-        }
+        parent::data_preprocessing($defaultvalues);
+
+        $defaultvalues['readpercentactive'] = $defaultvalues['readpercent'] != "0" ? 1 : 0;
     }
 
     /**
@@ -115,13 +115,9 @@ class mod_book_mod_form extends moodleform_mod {
      * @return stdClass|void
      */
     public function data_postprocessing($data) {
-        if(empty($data->completionviewactive)) {
-            $data->completionview = "0";
-        }
+        parent::data_postprocessing($data);
 
-        unset($data->completionviewactive);
-
-        return $data;
+        $data->readpercentactive = empty($data->readpercent) ? "0" : "1";
     }
 
     /**
@@ -135,19 +131,37 @@ class mod_book_mod_form extends moodleform_mod {
         $mform = $this->_form;
 
         $completionviews = [];
-        for ($i = 10; $i <= 100; $i+=10) {
+        for ($i = 0; $i <= 100; $i += 10) {
             $completionviews[$i] = $i . '%';
         }
 
         $group = [
-            $mform->createElement('checkbox', 'completionviewactive', '   ', get_string('requiredcompletionview', 'book')),
-            $mform->createElement('select', 'completionview', get_string('completionviewselect', 'book'), $completionviews),
+            $mform->createElement('checkbox', 'readpercentactive', '   ', get_string('requiredreadpercent', 'book')),
+            $mform->createElement('select', 'readpercent', get_string('readpercentselect', 'book'), $completionviews),
         ];
 
-        $mform->addGroup($group, 'completionviewgroup', get_string('completionviewselect', 'book'), ['<br>'], false);
-        $mform->disabledIf('completionview', 'completionviewactive', 'notchecked');
+        $mform->addGroup($group, 'completionviewgroup', get_string('readpercentselect', 'book'), ['<br>'], false);
+        $mform->disabledIf('readpercent', 'readpercentactive', 'notchecked');
 
         return ['completionviewgroup'];
+    }
+
+    /**
+     * Validates the form.
+     *
+     * @param array $data
+     * @param array $files
+     *
+     * @return array
+     */
+    public function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+
+        if ($data['readpercentactive'] && $data['readpercent'] == '0') {
+            $errors['completionviewgroup'] = get_string('readpercentvalidation', 'mod_book');
+        }
+
+        return $errors;
     }
 
     /**
@@ -158,6 +172,6 @@ class mod_book_mod_form extends moodleform_mod {
      * @return bool True if one or more rules is enabled, false if none are.
      */
     public function completion_rule_enabled($data) {
-        return (!empty($data['completionviewactive']) && $data['completionview'] > 0);
+        return (!empty($data['readpercentactive']) && $data['readpercent'] > 0);
     }
 }

@@ -694,8 +694,6 @@ function book_export_contents($cm, $baseurl) {
  * @since Moodle 3.0
  */
 function book_view($book, $context, $chapter = null) {
-    global $DB;
-
     // First case, we are just opening the book.
     if (empty($chapter)) {
         \mod_book\event\course_module_viewed::create_from_book($book, $context)->trigger();
@@ -823,13 +821,7 @@ function book_get_completion_state($course, $cm, $userid, $type) {
             return $type;
         }
 
-        $percentviewed = \mod_book\data\userviews::get_book_userview_progress($book->id, $userid);
-
-        if ($percentviewed >= $book->completionview) {
-            return true;
-        }
-
-        return false;
+        return \mod_book\data\userviews::is_book_read_complete($book, $userid);
     } catch (\Exception $e) {
         if ($CFG->debug == DEBUG_DEVELOPER) {
             throw $e;
