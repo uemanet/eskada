@@ -131,7 +131,7 @@ class userviews {
     public static function is_book_read_complete($book, $userid) {
         $bookprogress = self::get_book_userview_progress($book->id, $userid);
 
-        if ($book->readpercent >= $bookprogress) {
+        if ($bookprogress >= $book->readpercent) {
             return true;
         }
 

@@ -130,7 +130,7 @@ $string['bookreadreport'] = 'Students reading progress';
 $string['reportreadtitle'] = 'Students book reading progress';
 $string['readprogress'] = 'Reading progress';
 
-$string['readpercent_ruledesc'] = 'Watch {$a}% of the video';
+$string['readpercent_ruledesc'] = 'Read {$a}% of the book';
 $string['requiredreadpercent'] = 'The user needs to read at least this percent of the Book:';
 $string['readpercentselect'] = 'Required read percent';
 $string['readpercentvalidation'] = 'You need to define the required read percentage';
