@@ -800,38 +800,6 @@ function mod_book_core_calendar_provide_event_action(calendar_event $event,
 }
 
 /**
- * Obtains the automatic completion state for this book based on any conditions in book settings.
- *
- * @param $course
- * @param $cm
- * @param $userid
- * @param $type
- *
- * @return bool
- *
- * @throws Exception
- */
-function book_get_completion_state($course, $cm, $userid, $type) {
-    global $CFG, $DB;
-
-    try {
-        $book = $DB->get_record('book', array('id' => $cm->instance), '*', MUST_EXIST);
-
-        if (!$book->completionview) {
-            return $type;
-        }
-
-        return \mod_book\data\userviews::is_book_read_complete($book, $userid);
-    } catch (\Exception $e) {
-        if ($CFG->debug == DEBUG_DEVELOPER) {
-            throw $e;
-        }
-
-        return $type;
-    }
-}
-
-/**
  * Add a get_coursemodule_info function in case any survey type wants to add 'extra' information
  * for the course (see resource).
  *
